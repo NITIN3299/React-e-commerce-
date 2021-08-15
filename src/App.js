@@ -11,12 +11,18 @@ import {
   Products,
   PrivateRoute
 } from './pages'
+
+import ScannerPage from './scanner/ScannerPage'
+
 function App() {
   return (
     <Router>
-      <Navbar/>
-      <Sidebar/>
+      <Navbar />
+      <Sidebar />
       <Switch>
+        <Route exact path='/scan'>
+          <ScannerPage />
+        </Route>
         <Route exact path='/'>
           <Home />
         </Route>
@@ -27,12 +33,12 @@ function App() {
           <Cart />
         </Route>
         <PrivateRoute exact path='/checkout'>
-          <Checkout/>
+          <Checkout />
         </PrivateRoute>
         <Route exact path='/products'>
           <Products />
         </Route>
-        <Route exact path='/products/:id' children={<SingleProduct/>} />
+        <Route exact path='/products/:id' children={<SingleProduct />} />
         <Route path='*'>
           <Error />
         </Route>

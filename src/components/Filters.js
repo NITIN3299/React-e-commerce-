@@ -6,98 +6,98 @@ import { FaCheck } from 'react-icons/fa'
 
 const Filters = () => {
   const {
-    filters:{
-      text,category,company,color,min_price,price,max_price,shipping,
+    filters: {
+      text, category, company, color, min_price, price, max_price, shipping,
     },
     updatefilters,
     clearfilters,
     all_products,
   } = useFilterContext()
 
-  const categories = getUniqueValues(all_products,'category')
-  const companies = getUniqueValues(all_products,'company')
-  const colors = getUniqueValues(all_products,'colors')
+  const categories = getUniqueValues(all_products, 'category')
+  const companies = getUniqueValues(all_products, 'company')
+  const colors = getUniqueValues(all_products, 'colors')
 
   //console.log(categories);
-  return (   
+  return (
     <Wrapper>
       <div className='content'>
-        <form onSubmit={(e)=>e.preventDefault()}>
+        <form onSubmit={(e) => e.preventDefault()}>
           {/* search input */}
           <div className="form-control">
             <input
               type='text'
               name='text'
               placeholder='search'
-              className='search-input' 
-              vlaue={text}
+              className='search-input'
+              value={text}
               onChange={updatefilters} />
           </div>
-           { /* categories */}
-           <div className='form-control'>
-             <h5>category</h5>
-             <div>
-               {categories.map((c,index)=>{
-                 return (
-                   <button className={`${category===c.toLowerCase()?'active':null}`}
-                   onClick={updatefilters} 
-                   key={index} 
+          { /* categories */}
+          <div className='form-control'>
+            <h5>category</h5>
+            <div>
+              {categories.map((c, index) => {
+                return (
+                  <button className={`${category === c.toLowerCase() ? 'active' : null}`}
+                    onClick={updatefilters}
+                    key={index}
                     type='button'
                     name='category'>{c}</button>
-                 )
-               })}
-             </div>
-           </div>
-           { /* companies */}
-           <div className='form-control'>
-             <h5>company</h5>
-             <select name='company' value={company} onChange={updatefilters} className='company'>
-               {companies.map((c,index)=>{
-                 return <option key={index} value={c}>{c}</option>
-               })}
-             </select>
-           </div>
-           {/* colors */}
-           <div className="form-control">
-             <h5>colors</h5>
-             <div className="colors">
-               {colors.map((c,index)=>{
-                 if(c==='all'){
-                   return <button key={index} name='color' onClick={updatefilters} data-color='all'
-                   className={`${color==='all'?'all-btn active':'all-btn'}`}>
-                     all
-                   </button>
-                 }
-                 return <button key={index} name='color' style={
-                   {background:c}
-                 } className={`${color===c?'color-btn active':'color-btn'}`}
-                   data-color={c} onClick={updatefilters}> 
-                   {color===c?<FaCheck/>:null}
-                   </button>
-               })}
-             </div>
-           </div>
-           {/* price */}
-           <div className="form-control">
-             <h5>price</h5>
-             <p className="price">{formatPrice(price)}</p>
-             <input
+                )
+              })}
+            </div>
+          </div>
+          { /* companies */}
+          <div className='form-control'>
+            <h5>company</h5>
+            <select name='company' value={company} onChange={updatefilters} className='company'>
+              {companies.map((c, index) => {
+                return <option key={index} value={c}>{c}</option>
+              })}
+            </select>
+          </div>
+          {/* colors */}
+          <div className="form-control">
+            <h5>colors</h5>
+            <div className="colors">
+              {colors.map((c, index) => {
+                if (c === 'all') {
+                  return <button key={index} name='color' onClick={updatefilters} data-color='all'
+                    className={`${color === 'all' ? 'all-btn active' : 'all-btn'}`}>
+                    all
+                  </button>
+                }
+                return <button key={index} name='color' style={
+                  { background: c }
+                } className={`${color === c ? 'color-btn active' : 'color-btn'}`}
+                  data-color={c} onClick={updatefilters}>
+                  {color === c ? <FaCheck /> : null}
+                </button>
+              })}
+            </div>
+          </div>
+          {/* price */}
+          <div className="form-control">
+            <h5>price</h5>
+            <p className="price">{formatPrice(price)}</p>
+            <input
               type='range'
               name='price'
               onChange={updatefilters}
               min={min_price}
               max={max_price}
               value={price} />
-           </div>
-           <div className="form-control shipping">
-             <label htmlFor="shipping">free shipping</label>
-             <input
-                type='checkbox'
-                name='shipping'
-                id='shipping'
-                onChange={updatefilters}
-                checked={shipping} />
-           </div>
+          </div>
+          <div className="form-control shipping">
+            <label htmlFor="shipping">free shipping</label>
+            <input
+              type='checkbox'
+              name='shipping'
+              id='shipping'
+              onChange={updatefilters}
+              checked={shipping} />
+          </div>
         </form>
         <button className="clear-btn" onClick={clearfilters}>clear filters</button>
       </div>
